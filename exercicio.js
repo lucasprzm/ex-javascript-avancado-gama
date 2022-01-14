@@ -1155,3 +1155,14 @@ function totalItensDisponiveisDestaque() {
   console.log(`Itens Disponíveis e em Destaque: ${itens}`);
 }
 totalItensDisponiveisDestaque();
+
+function inventarioEmpresa() {
+  let inventario = 0;
+  listaProdutos.forEach((element) => {
+    if (element.disponivel == "sim") {
+      inventario += element.preco * element.qtdEstoque;
+    }
+  });
+  console.log(`Inventário da Empresa: R$${inventario}`);
+}
+inventarioEmpresa();
