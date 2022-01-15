@@ -1189,25 +1189,46 @@ function produtoMaisBarato() {
 produtoMaisBarato();
 
 function produtoEstoqueMaisValioso() {
-  let produtoEstoqueMaisValioso = listaProdutos[0];
+  let produtoMaisValioso = listaProdutos[0];
   listaProdutos.forEach((element) => {
     if (
       element.disponivel == "sim" &&
       element.preco * element.qtdEstoque >
-        produtoEstoqueMaisValioso.preco * produtoEstoqueMaisValioso.qtdEstoque
+        produtoMaisValioso.preco * produtoMaisValioso.qtdEstoque
     ) {
-      produtoEstoqueMaisValioso = element;
+      produtoMaisValioso = element;
     }
   });
   console.log(
     `Produto com Estoque mais Valioso: ${
-      produtoEstoqueMaisValioso.descricao
-    }, Valor do Estoque: R$${
-      produtoEstoqueMaisValioso.preco * produtoEstoqueMaisValioso.qtdEstoque
-    }`
+      produtoMaisValioso.descricao
+    }, Valor do Estoque: R$${(
+      produtoMaisValioso.preco * produtoMaisValioso.qtdEstoque
+    ).toFixed(2)}`
   );
 }
 produtoEstoqueMaisValioso();
+
+function produtoEstoqueMenosValioso() {
+  let produtoMenosValioso = listaProdutos[0];
+  listaProdutos.forEach((element) => {
+    if (
+      element.disponivel == "sim" &&
+      element.preco * element.qtdEstoque <
+        produtoMenosValioso.preco * produtoMenosValioso.qtdEstoque
+    ) {
+      produtoMenosValioso = element;
+    }
+  });
+  console.log(
+    `Produto com Estoque menos Valioso: ${
+      produtoMenosValioso.descricao
+    }, Valor do Estoque: R$${(
+      produtoMenosValioso.preco * produtoMenosValioso.qtdEstoque
+    ).toFixed(2)}`
+  );
+}
+produtoEstoqueMenosValioso();
 
 function itensPorDepartamento() {
   let objetoResposta = {};
