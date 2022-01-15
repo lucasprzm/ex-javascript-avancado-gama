@@ -1112,36 +1112,31 @@ var listaProdutos = [
     },
   },
 ];
-var teste = [1, 2, 3, 4, 5];
 
 function totalItensEmEstoque() {
-  let estoqueEmQuantidade = 0;
-  listaProdutos.forEach((element) => {
-    estoqueEmQuantidade += element.qtdEstoque;
-  });
+  let estoqueEmQuantidade = listaProdutos.reduce(
+    (previousValue, currentValue) => {
+      return previousValue + currentValue.qtdEstoque;
+    },
+    0
+  );
   console.log(`Quantidade em Estoque: ${estoqueEmQuantidade}`);
 }
 totalItensEmEstoque();
 
 function totalItensEmDestaque() {
-  let itensEmDestaque = 0;
-  listaProdutos.forEach((element) => {
-    if (element.emDestaque == "sim") {
-      itensEmDestaque++;
-    }
+  let itensEmDestaque = listaProdutos.filter((element) => {
+    return element.emDestaque == "sim";
   });
-  console.log(`Itens em Destaque: ${itensEmDestaque}`);
+  console.log(`Itens em Destaque: ${itensEmDestaque.length}`);
 }
 totalItensEmDestaque();
 
 function totalItensDisponiveis() {
-  let itensDisponiveis = 0;
-  listaProdutos.forEach((element) => {
-    if (element.disponivel == "sim") {
-      itensDisponiveis++;
-    }
+  let itensDisponiveis = listaProdutos.filter((element) => {
+    return element.disponivel == "sim";
   });
-  console.log(`Itens Disponíveis: ${itensDisponiveis}`);
+  console.log(`Itens Disponíveis: ${itensDisponiveis.length}`);
 }
 totalItensDisponiveis();
 
@@ -1166,3 +1161,49 @@ function inventarioEmpresa() {
   console.log(`Inventário da Empresa: R$${inventario}`);
 }
 inventarioEmpresa();
+
+function produtoMaisCaro() {
+  let elementoMaisCaro = listaProdutos[0];
+  listaProdutos.forEach((element) => {
+    if (element.preco > elementoMaisCaro.preco) {
+      elementoMaisCaro = element;
+    }
+  });
+  console.log(`Produto mais caro:
+    Produto: ${elementoMaisCaro.descricao}, Departamento: ${elementoMaisCaro.departamento.nomeDepto}, Preço: R$${elementoMaisCaro.preco}`);
+}
+produtoMaisCaro();
+
+function itensPorDepartamento() {
+  let objetoResposta = {};
+  listaProdutos.forEach((element) => {
+    if (objetoResposta[element.departamento.nomeDepto]) {
+      objetoResposta[element.departamento.nomeDepto] += element.qtdEstoque;
+    } else {
+      objetoResposta[element.departamento.nomeDepto] = element.qtdEstoque;
+    }
+  });
+  console.log(objetoResposta);
+}
+itensPorDepartamento();
+
+function ticketMedioPorDepartamento() {
+  let objetoResposta = {};
+  listaProdutos.forEach((element) => {
+    if (objetoResposta[element.departamento.nomeDepto]) {
+      objetoResposta[element.departamento.nomeDepto].push(element.preco);
+    } else {
+      objetoResposta[element.departamento.nomeDepto] = [element.preco];
+    }
+  });
+  let keys = Object.keys(objetoResposta);
+  let objetoTicket = [];
+  keys.forEach((key) => {
+    let soma = objetoResposta[key].reduce((valor1, valor2) => valor1 + valor2);
+    soma = Number((soma / objetoResposta[key].length).toFixed(2));
+    objetoTicket.push({ nome: key, "ticket médio": soma });
+  });
+
+  console.log(objetoTicket);
+}
+ticketMedioPorDepartamento();
