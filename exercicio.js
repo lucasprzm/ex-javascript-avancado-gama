@@ -1174,6 +1174,17 @@ function produtoMaisCaro() {
 }
 produtoMaisCaro();
 
+function produtoMaisBarato() {
+  let elementoMaisBarato = listaProdutos[0];
+  listaProdutos.forEach((element) => {
+    if (element.preco < elementoMaisBarato.preco) {
+      elementoMaisBarato = element;
+    }
+  });
+  console.log(`Produto mais barato:
+    Produto: ${elementoMaisBarato.descricao}, Departamento: ${elementoMaisBarato.departamento.nomeDepto}, Preço: R$${elementoMaisBarato.preco}`);
+}
+
 function itensPorDepartamento() {
   let objetoResposta = {};
   listaProdutos.forEach((element) => {
