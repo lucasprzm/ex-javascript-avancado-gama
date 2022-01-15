@@ -1169,8 +1169,9 @@ function produtoMaisCaro() {
       elementoMaisCaro = element;
     }
   });
-  console.log(`Produto mais caro:
-    Produto: ${elementoMaisCaro.descricao}, Departamento: ${elementoMaisCaro.departamento.nomeDepto}, Preço: R$${elementoMaisCaro.preco}`);
+  console.log(
+    `Produto mais caro: ${elementoMaisCaro.descricao}, Departamento: ${elementoMaisCaro.departamento.nomeDepto}, Preço: R$${elementoMaisCaro.preco}`
+  );
 }
 produtoMaisCaro();
 
@@ -1181,9 +1182,32 @@ function produtoMaisBarato() {
       elementoMaisBarato = element;
     }
   });
-  console.log(`Produto mais barato:
-    Produto: ${elementoMaisBarato.descricao}, Departamento: ${elementoMaisBarato.departamento.nomeDepto}, Preço: R$${elementoMaisBarato.preco}`);
+  console.log(
+    `Produto mais barato: ${elementoMaisBarato.descricao}, Departamento: ${elementoMaisBarato.departamento.nomeDepto}, Preço: R$${elementoMaisBarato.preco}`
+  );
 }
+produtoMaisBarato();
+
+function produtoEstoqueMaisValioso() {
+  let produtoEstoqueMaisValioso = listaProdutos[0];
+  listaProdutos.forEach((element) => {
+    if (
+      element.disponivel == "sim" &&
+      element.preco * element.qtdEstoque >
+        produtoEstoqueMaisValioso.preco * produtoEstoqueMaisValioso.qtdEstoque
+    ) {
+      produtoEstoqueMaisValioso = element;
+    }
+  });
+  console.log(
+    `Produto com Estoque mais Valioso: ${
+      produtoEstoqueMaisValioso.descricao
+    }, Valor do Estoque: R$${
+      produtoEstoqueMaisValioso.preco * produtoEstoqueMaisValioso.qtdEstoque
+    }`
+  );
+}
+produtoEstoqueMaisValioso();
 
 function itensPorDepartamento() {
   let objetoResposta = {};
