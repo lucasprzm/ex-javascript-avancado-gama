@@ -1113,13 +1113,11 @@ var listaProdutos = [
   },
 ];
 
+var estoqueEmQuantidade = 0;
 function totalItensEmEstoque() {
-  let estoqueEmQuantidade = listaProdutos.reduce(
-    (previousValue, currentValue) => {
-      return previousValue + currentValue.qtdEstoque;
-    },
-    0
-  );
+  estoqueEmQuantidade = listaProdutos.reduce((previousValue, currentValue) => {
+    return previousValue + currentValue.qtdEstoque;
+  }, 0);
   console.log(`Quantidade em Estoque: ${estoqueEmQuantidade}`);
 }
 totalItensEmEstoque();
@@ -1151,8 +1149,8 @@ function totalItensDisponiveisDestaque() {
 }
 totalItensDisponiveisDestaque();
 
+var inventario = 0;
 function inventarioEmpresa() {
-  let inventario = 0;
   listaProdutos.forEach((element) => {
     if (element.disponivel == "sim") {
       inventario += element.preco * element.qtdEstoque;
@@ -1229,6 +1227,12 @@ function produtoEstoqueMenosValioso() {
   );
 }
 produtoEstoqueMenosValioso();
+
+function ticketMedioTotal() {
+  let ticketMedio = inventario / estoqueEmQuantidade;
+  console.log(`Ticket médio de todos produtos: R$${ticketMedio.toFixed(2)}`);
+}
+ticketMedioTotal();
 
 function itensPorDepartamento() {
   let objetoResposta = {};
