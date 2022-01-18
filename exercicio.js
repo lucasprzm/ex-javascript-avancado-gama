@@ -1268,10 +1268,12 @@ function ticketMedioPorDepartamento() {
 }
 ticketMedioPorDepartamento();
 
-function departamentoMaisValioso() {
+function departamentoMaisMenosValioso() {
   let objetoResposta = {};
   let maior = 0;
   let chaveMaior = "";
+  let menor = Infinity;
+  let chaveMenor = "";
   listaProdutos.forEach((element) => {
     if (objetoResposta[element.departamento.nomeDepto]) {
       objetoResposta[element.departamento.nomeDepto] +=
@@ -1286,10 +1288,14 @@ function departamentoMaisValioso() {
       maior = objetoResposta[key];
       chaveMaior = key;
     }
+    if (objetoResposta[key] < menor) {
+      menor = objetoResposta[key];
+      chaveMenor = key;
+    }
   }
   console.log(
-    `Departamento mais valioso: ${chaveMaior} com R$${maior.toFixed(2)}`
+    `Departamento mais valioso: ${chaveMaior} com R$${maior.toFixed(2)}
+Departamento menos valioso: ${chaveMenor} com R$${menor.toFixed(2)}`
   );
 }
-
-departamentoMaisValioso();
+departamentoMaisMenosValioso();
