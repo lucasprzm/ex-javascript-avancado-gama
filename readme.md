@@ -3,3 +3,5 @@
 ### Descrição e solicitação do exercício no PDF Atividade Complementar.
 
 ### Linguagem de Programação: JavaScript
+
+#### Resolução do exercício no arquivo exercicio.js
