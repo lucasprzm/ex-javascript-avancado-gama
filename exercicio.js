@@ -1261,9 +1261,35 @@ function ticketMedioPorDepartamento() {
   keys.forEach((key) => {
     let soma = objetoResposta[key].reduce((valor1, valor2) => valor1 + valor2);
     soma = Number((soma / objetoResposta[key].length).toFixed(2));
-    objetoTicket.push({ nome: key, "ticket médio": soma });
+    objetoTicket.push({ Departamento: key, "Ticket Médio": soma });
   });
 
   console.log(objetoTicket);
 }
 ticketMedioPorDepartamento();
+
+function departamentoMaisValioso() {
+  let objetoResposta = {};
+  let maior = 0;
+  let chaveMaior = "";
+  listaProdutos.forEach((element) => {
+    if (objetoResposta[element.departamento.nomeDepto]) {
+      objetoResposta[element.departamento.nomeDepto] +=
+        element.qtdEstoque * element.preco;
+    } else {
+      objetoResposta[element.departamento.nomeDepto] =
+        element.qtdEstoque * element.preco;
+    }
+  });
+  for (const key in objetoResposta) {
+    if (objetoResposta[key] > maior) {
+      maior = objetoResposta[key];
+      chaveMaior = key;
+    }
+  }
+  console.log(
+    `Departamento mais valioso: ${chaveMaior} com R$${maior.toFixed(2)}`
+  );
+}
+
+departamentoMaisValioso();
