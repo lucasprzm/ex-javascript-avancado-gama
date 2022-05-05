@@ -1256,11 +1256,14 @@ function ticketMedioPorDepartamento() {
       objetoResposta[element.departamento.nomeDepto] = [element.preco];
     }
   });
+  console.log(objetoResposta);
   let keys = Object.keys(objetoResposta);
   let objetoTicket = [];
   keys.forEach((key) => {
     let soma = objetoResposta[key].reduce((valor1, valor2) => valor1 + valor2);
+
     soma = Number((soma / objetoResposta[key].length).toFixed(2));
+
     objetoTicket.push({ Departamento: key, "Ticket Médio": soma });
   });
 
